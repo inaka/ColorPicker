@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, ColorPicker {
+class ViewController: UIViewController, ColorPickerDelegate {
 
     private var customInputView: UIView?;
     @IBOutlet var textInput: UITextView?;

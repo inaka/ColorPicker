@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol ColorPicker {
+protocol ColorPickerDelegate {
     func colorSelectedChanged(color: UIColor);
 }
 
@@ -20,11 +20,11 @@ class IKColorPicker: UIView
 
     private var hueColorsImageView: UIImageView?, brightnessColorsImageView: UIImageView?, fullColorImageView: UIImageView?;
     
-    var delegate: ColorPicker?;
+    var delegate: ColorPickerDelegate?;
     
-    func colorFor( X: CGFloat, Y: CGFloat) -> UIColor
+    func colorFor( x: CGFloat, y: CGFloat) -> UIColor
     {
-        return UIColor(hue: X/256, saturation: Y/256, brightness:1, alpha: 1);
+        return UIColor(hue: x/256, saturation: y/256, brightness:1, alpha: 1);
     }
     
     func colorWithColor(baseColor: UIColor, brightness: CGFloat) -> UIColor
@@ -55,7 +55,7 @@ class IKColorPicker: UIView
             for(var x: CGFloat = 0; x < imageWidth; x += imageWidth/256)
             {
                 let rec = CGRect(x: x, y: y, width: recSize.width , height: recSize.height);
-                let color = self.colorFor(x, Y: y);
+                let color = self.colorFor(x, y: y);
                 
                 CGContextSetFillColorWithColor(context, color.CGColor);
                 CGContextFillRect(context,rec);
@@ -123,7 +123,8 @@ class IKColorPicker: UIView
     
     func loadView()
     {
-        self.frame = CGRect(x:0,y:0,width:320,height:viewPickerHeight);
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        self.frame = CGRect(x:0,y:0,width:Int(screenSize.width),height:viewPickerHeight);
         
         let hueColorImage = self.createHueColorImage();
         self.hueColorsImageView = UIImageView(image: hueColorImage);
@@ -164,10 +165,7 @@ class IKColorPicker: UIView
                 fullColorImageView!.image = fullColorImage;
             }
             
-            if(self.delegate != nil)
-            {
-                self.delegate!.colorSelectedChanged(self.selectedColor);
-            }
+            self.delegate?.colorSelectedChanged(self.selectedColor);
         }
     }
     
@@ -209,7 +207,7 @@ class IKColorPicker: UIView
         {
             let picked = sender.locationOfTouch(0, inView: sender.view);
             
-            self.selectedBaseColor = self.colorFor(picked.x, Y:picked.y);
+            self.selectedBaseColor = self.colorFor(picked.x, y:picked.y);
             self.selectedColor = self.colorWithColor(self.selectedBaseColor, brightness:self.selectedBrightness);
         }
     }
