@@ -15,16 +15,18 @@ protocol ColorPickerDelegate {
 
 class IKColorPicker: UIView
 {
-    private let viewPickerHeight = 290;
+    private var viewPickerHeight = 0;
     private let brightnessPickerHeight = 30;
 
-    private var hueColorsImageView: UIImageView?, brightnessColorsImageView: UIImageView?, fullColorImageView: UIImageView?;
+    private var hueColorsImageView: UIImageView!, brightnessColorsImageView: UIImageView!, fullColorImageView: UIImageView!;
     
     var delegate: ColorPickerDelegate?;
     
     func colorFor( x: CGFloat, y: CGFloat) -> UIColor
     {
-        return UIColor(hue: x/256, saturation: y/256, brightness:1, alpha: 1);
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+
+        return UIColor(hue: (x/screenSize.width), saturation: y/CGFloat(viewPickerHeight), brightness:1, alpha: 1);
     }
     
     func colorWithColor(baseColor: UIColor, brightness: CGFloat) -> UIColor
@@ -47,8 +49,8 @@ class IKColorPicker: UIView
         
         UIGraphicsBeginImageContext(size);
         let context: CGContextRef = UIGraphicsGetCurrentContext();
-        let recSize = CGSize(width:CGFloat(ceilf(Float(imageWidth/256))),
-                            height:CGFloat(ceilf(Float(imageWidth/256))));
+        let recSize = CGSize(width:ceil(imageWidth/256),
+                            height:ceil(imageWidth/256));
         
         for(var y: CGFloat = 0; y < imageHeight; y += imageHeight/256)
         {
@@ -78,7 +80,7 @@ class IKColorPicker: UIView
         
         UIGraphicsBeginImageContextWithOptions(size, false, 0);
         let context: CGContextRef = UIGraphicsGetCurrentContext();
-        let recSize = CGSize(width:CGFloat(ceilf(Float(imageWidth/256))),
+        let recSize = CGSize(width:ceil(imageWidth/256),
             height:imageHeight);
         
         var hue:CGFloat = 0.0;
@@ -88,7 +90,7 @@ class IKColorPicker: UIView
         for(var x: CGFloat = 0; x < imageWidth; x += imageWidth/256)
         {
             let rec = CGRect(x: x, y: 0, width: recSize.width , height: recSize.height);
-            let color = UIColor(hue: hue, saturation: saturation, brightness: (256-x)/256, alpha: 1);
+            let color = UIColor(hue: hue, saturation: saturation, brightness: (imageWidth-x)/imageWidth, alpha: 1);
             
             CGContextSetFillColorWithColor(context, color.CGColor);
             CGContextFillRect(context,rec);
@@ -100,18 +102,14 @@ class IKColorPicker: UIView
         return hueImage;
     }
 
-    func createFullColorImage(color :UIColor) -> UIImage
+    func createFullColorImage(color :UIColor, size: CGSize, radius: CGFloat) -> UIImage
     {
-        let imageHeight: CGFloat = 40;
-        let imageWidth: CGFloat  = 40;
-        let size: CGSize = CGSize(width: imageWidth, height: CGFloat(imageHeight));
-
         UIGraphicsBeginImageContextWithOptions(size, false, 0);
         let context: CGContextRef = UIGraphicsGetCurrentContext();
         let rec = CGRect(x: 0, y: 0, width: size.width , height: size.height);
 
         CGContextSetFillColorWithColor(context, color.CGColor);
-        let roundedRect = UIBezierPath(roundedRect: rec, cornerRadius: 6);
+        let roundedRect = UIBezierPath(roundedRect: rec, cornerRadius: radius);
         roundedRect.fillWithBlendMode(kCGBlendModeNormal, alpha: 1);
         
         let fullColorImage =  UIGraphicsGetImageFromCurrentImageContext();
@@ -124,36 +122,39 @@ class IKColorPicker: UIView
     func loadView()
     {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
+        viewPickerHeight = Int(ceil( screenSize.width / 1.10344));
+
         self.frame = CGRect(x:0,y:0,width:Int(screenSize.width),height:viewPickerHeight);
+        
         
         let hueColorImage = self.createHueColorImage();
         self.hueColorsImageView = UIImageView(image: hueColorImage);
-        self.addSubview(self.hueColorsImageView!);
+        self.addSubview(self.hueColorsImageView);
         
         let panRecognizer = UIPanGestureRecognizer(target: self, action:"baseColorPicking:");
-        self.hueColorsImageView!.addGestureRecognizer(panRecognizer);
+        self.hueColorsImageView.addGestureRecognizer(panRecognizer);
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "baseColorPicking:");
-        self.hueColorsImageView!.addGestureRecognizer(tapRecognizer);
-        self.hueColorsImageView!.userInteractionEnabled = true;
+        self.hueColorsImageView.addGestureRecognizer(tapRecognizer);
+        self.hueColorsImageView.userInteractionEnabled = true;
         
         
         //------
         let brightnessColorImage = self.createBrightnessImage(self.selectedBaseColor);
         self.brightnessColorsImageView = UIImageView(image: brightnessColorImage);
-        self.addSubview(self.brightnessColorsImageView!);
+        self.addSubview(self.brightnessColorsImageView);
     
-        var brImgRect = self.brightnessColorsImageView!.frame;
-        brImgRect.origin.y = self.hueColorsImageView!.frame.origin.y + self.hueColorsImageView!.frame.size.height;
-        self.brightnessColorsImageView!.frame = brImgRect;
-        self.brightnessColorsImageView!.userInteractionEnabled = true;
+        var brImgRect = self.brightnessColorsImageView.frame;
+        brImgRect.origin.y = self.hueColorsImageView.frame.origin.y + self.hueColorsImageView.frame.size.height;
+        self.brightnessColorsImageView.frame = brImgRect;
+        self.brightnessColorsImageView.userInteractionEnabled = true;
     
         let brightSlideGesture = UIPanGestureRecognizer(target: self, action:Selector("colorPicking:"));
-        self.brightnessColorsImageView!.addGestureRecognizer(brightSlideGesture);
+        self.brightnessColorsImageView.addGestureRecognizer(brightSlideGesture);
         
         let brightTapGesture = UITapGestureRecognizer(target: self, action: Selector("colorPicking:"));
-        self.brightnessColorsImageView!.addGestureRecognizer(brightTapGesture);
-        self.brightnessColorsImageView!.userInteractionEnabled = true;
+        self.brightnessColorsImageView.addGestureRecognizer(brightTapGesture);
+        self.brightnessColorsImageView.userInteractionEnabled = true;
     }
     
     internal var selectedColor: UIColor
@@ -161,8 +162,8 @@ class IKColorPicker: UIView
         didSet{
             if((self.fullColorImageView) != nil)
             {
-                let fullColorImage = self.createFullColorImage(selectedColor);
-                fullColorImageView!.image = fullColorImage;
+                let fullColorImage = self.createFullColorImage(selectedColor, size: CGSize(width: 40, height: 40),radius: CGFloat(6));
+                fullColorImageView.image = fullColorImage;
             }
             
             self.delegate?.colorSelectedChanged(self.selectedColor);
@@ -191,7 +192,7 @@ class IKColorPicker: UIView
     {
         didSet{
         var brightnessColorImage = self.createBrightnessImage(self.selectedBaseColor);
-        self.brightnessColorsImageView!.image = brightnessColorImage;
+        self.brightnessColorsImageView.image = brightnessColorImage;
         }
     }
     
@@ -217,7 +218,7 @@ class IKColorPicker: UIView
         if(sender.numberOfTouches()==1)
         {
             var picked = sender.locationOfTouch(0, inView:sender.view);
-            self.setSelectedBrightness((256-picked.x)/256);
+            self.setSelectedBrightness((sender.view!.frame.width-picked.x)/sender.view!.frame.width);
         }
     }
     

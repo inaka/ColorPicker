@@ -32,7 +32,7 @@ class ViewController: UIViewController, ColorPickerDelegate {
     func colorSelectedChanged(color: UIColor) {
         self.textInput?.textColor = color;
         
-        let colorImage = self.colorPicker!.createFullColorImage(self.textInput!.textColor);
+        let colorImage = self.colorPicker!.createFullColorImage(self.textInput!.textColor, size: CGSize(width: 40, height: 40),radius: CGFloat(6));
         self.colorPickerButton!.setImage(colorImage, forState:UIControlState.Normal);
 
     }
@@ -64,7 +64,7 @@ class ViewController: UIViewController, ColorPickerDelegate {
             self.customInputView!.addSubview(kbButton);
             
             // create a button for our font & size keyboard
-            let colorImage = self.colorPicker!.createFullColorImage(self.textInput!.textColor);
+            let colorImage = self.colorPicker!.createFullColorImage(self.textInput!.textColor, size: CGSize(width: 40, height: 40),radius: CGFloat(6));
             var colorButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton;
             colorButton.frame = CGRectMake(60, 5, 40, 40);
             colorButton.setImage(colorImage, forState:UIControlState.Normal);
@@ -89,7 +89,7 @@ class ViewController: UIViewController, ColorPickerDelegate {
         self.textInput!.inputView = self.colorPicker;
         self.colorPicker!.selectedColor = self.textInput!.textColor;
         
-        let colorImage = self.colorPicker!.createFullColorImage(self.textInput!.textColor);
+        let colorImage = self.colorPicker!.createFullColorImage(self.textInput!.textColor, size: CGSize(width: 40, height: 40),radius: CGFloat(6));
         self.colorPickerButton!.setImage(colorImage, forState:UIControlState.Normal);
         
         self.textInput!.reloadInputViews();
