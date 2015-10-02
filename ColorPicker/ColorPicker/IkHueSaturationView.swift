@@ -74,10 +74,10 @@ class IkHueSaturationView : UIView {
                 CGContextFillRect(context,rec);
             }
         }
-        self.hueSaturationImage = UIGraphicsGetImageFromCurrentImageContext();
+        let Image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        return self.hueSaturationImage;
+        return Image;
     }
     
     override func drawRect(rect: CGRect)

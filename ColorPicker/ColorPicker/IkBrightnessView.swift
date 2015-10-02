@@ -76,10 +76,10 @@ class IkBrightnessView : UIView {
             CGContextFillRect(context,rec);
         }
         
-        self.brightnessImage = UIGraphicsGetImageFromCurrentImageContext();
+        let Image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        return brightnessImage;
+        return Image;
     }
     
     override func drawRect(rect: CGRect)
