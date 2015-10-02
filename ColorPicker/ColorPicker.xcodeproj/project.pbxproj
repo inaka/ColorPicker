@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D92F13D1B7925A1006D09B0 /* IkColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D92F13C1B7925A1006D09B0 /* IkColorPicker.swift */; };
 		7DD003381B56B0A3008773E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD003371B56B0A3008773E8 /* AppDelegate.swift */; };
 		7DD0033A1B56B0A3008773E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD003391B56B0A3008773E8 /* ViewController.swift */; };
 		7DD0033D1B56B0A3008773E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD0033B1B56B0A3008773E8 /* Main.storyboard */; };
 		7DD0033F1B56B0A3008773E8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DD0033E1B56B0A3008773E8 /* Images.xcassets */; };
 		7DD003421B56B0A3008773E8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DD003401B56B0A3008773E8 /* LaunchScreen.xib */; };
 		7DD0034E1B56B0A3008773E8 /* ColorPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD0034D1B56B0A3008773E8 /* ColorPickerTests.swift */; };
+		7DFFAD9E1BBDD0AC00B80FD0 /* IkHueSaturationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFFAD9D1BBDD0AC00B80FD0 /* IkHueSaturationView.swift */; };
+		7DFFADA01BBDDCB300B80FD0 /* IkHueSaturationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFFAD9F1BBDDCB300B80FD0 /* IkHueSaturationPicker.swift */; };
+		7DFFADA41BBDFA8000B80FD0 /* IkBrightnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFFADA31BBDFA8000B80FD0 /* IkBrightnessView.swift */; };
+		7DFFADA61BBDFA8E00B80FD0 /* IkBrightnessPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFFADA51BBDFA8E00B80FD0 /* IkBrightnessPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +30,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7D92F13C1B7925A1006D09B0 /* IkColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IkColorPicker.swift; path = ../IkColorPicker.swift; sourceTree = "<group>"; };
 		7DD003321B56B0A3008773E8 /* ColorPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD003361B56B0A3008773E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DD003371B56B0A3008773E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +40,10 @@
 		7DD003471B56B0A3008773E8 /* ColorPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD0034C1B56B0A3008773E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DD0034D1B56B0A3008773E8 /* ColorPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerTests.swift; sourceTree = "<group>"; };
+		7DFFAD9D1BBDD0AC00B80FD0 /* IkHueSaturationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IkHueSaturationView.swift; sourceTree = "<group>"; };
+		7DFFAD9F1BBDDCB300B80FD0 /* IkHueSaturationPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IkHueSaturationPicker.swift; sourceTree = "<group>"; };
+		7DFFADA31BBDFA8000B80FD0 /* IkBrightnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IkBrightnessView.swift; sourceTree = "<group>"; };
+		7DFFADA51BBDFA8E00B80FD0 /* IkBrightnessPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IkBrightnessPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +85,8 @@
 		7DD003341B56B0A3008773E8 /* ColorPicker */ = {
 			isa = PBXGroup;
 			children = (
-				7D92F13C1B7925A1006D09B0 /* IkColorPicker.swift */,
+				7DFFADA21BBDFA6A00B80FD0 /* Brightness */,
+				7DFFADA11BBDFA6000B80FD0 /* HueSaturation */,
 				7DD003371B56B0A3008773E8 /* AppDelegate.swift */,
 				7DD003391B56B0A3008773E8 /* ViewController.swift */,
 				7DD0033B1B56B0A3008773E8 /* Main.storyboard */,
@@ -113,6 +120,24 @@
 				7DD0034C1B56B0A3008773E8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7DFFADA11BBDFA6000B80FD0 /* HueSaturation */ = {
+			isa = PBXGroup;
+			children = (
+				7DFFAD9D1BBDD0AC00B80FD0 /* IkHueSaturationView.swift */,
+				7DFFAD9F1BBDDCB300B80FD0 /* IkHueSaturationPicker.swift */,
+			);
+			name = HueSaturation;
+			sourceTree = "<group>";
+		};
+		7DFFADA21BBDFA6A00B80FD0 /* Brightness */ = {
+			isa = PBXGroup;
+			children = (
+				7DFFADA31BBDFA8000B80FD0 /* IkBrightnessView.swift */,
+				7DFFADA51BBDFA8E00B80FD0 /* IkBrightnessPicker.swift */,
+			);
+			name = Brightness;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,8 +240,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DFFADA01BBDDCB300B80FD0 /* IkHueSaturationPicker.swift in Sources */,
+				7DFFAD9E1BBDD0AC00B80FD0 /* IkHueSaturationView.swift in Sources */,
 				7DD0033A1B56B0A3008773E8 /* ViewController.swift in Sources */,
-				7D92F13D1B7925A1006D09B0 /* IkColorPicker.swift in Sources */,
+				7DFFADA41BBDFA8000B80FD0 /* IkBrightnessView.swift in Sources */,
+				7DFFADA61BBDFA8E00B80FD0 /* IkBrightnessPicker.swift in Sources */,
 				7DD003381B56B0A3008773E8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
